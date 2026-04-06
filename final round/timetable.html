@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Timetable - III Year/Semester V</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* Navigation Styles */
+        nav {
+            background-color: #3949ab;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.2rem;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: #303f9f;
+        }
+        
+        .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        
+        /* Main Content Styles */
+        main {
+            padding: 2rem 0;
+        }
+        
+        .section-title {
+            color: #1a237e;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3949ab;
+        }
+        
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #e8eaf6;
+            color: #1a237e;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f3f9;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #1a237e;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #3949ab;
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                width: 100%;
+            }
+            
+            .nav-links a {
+                padding: 1rem;
+                border-bottom: 1px solid #283593;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 0.5rem;
+            }
+            
+            th, td {
+                padding: 0.4rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">College Timetable System</div>
+            <div class="user-info">III Year / Semester V</div>
+        </div>
+    </header>
+    
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Home</a></li>
+                <li><a href="attendance.html">Attendance</a></li>
+                <li><a href="leave.html">Leave form</a></li>
+                <li><a href="#">OD Letters</a></li>
+                <li><a href="billing.html">Billing</a></li>
+            </ul>
+            <div class="hamburger">☰</div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="section-title">III Year / Semester V Timetable</h1>
+        
+        <!-- Timetable -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                    </tr>
+                    <tr>
+                        <th>TIME/DAY</th>
+                        <th>9.00am-10.00am</th>
+                        <th>10.20am-11.20am</th>
+                        <th>11.20am-12.20pm</th>
+                        <th>1.30pm-2.30pm</th>
+                        <th>2.45pm-3.45pm</th>
+                        <th>3.45pm-4.45pm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>MON</td>
+                        <td>210EE13</td>
+                        <td>210EN06</td>
+                        <td>210SE19</td>
+                        <td>210SE11</td>
+                        <td>210EE13</td>
+                        <td>21AID06</td>
+                    </tr>
+                    <tr>
+                        <td>TUE</td>
+                        <td>211NT02</td>
+                        <td>210EE13</td>
+                        <td>210EN06</td>
+                        <td>212ND06</td>
+                        <td>212ND06</td>
+                        <td>21ENGP3 (LAB)</td>
+                    </tr>
+                    <tr>
+                        <td>WED</td>
+                        <td>216EN06</td>
+                        <td>21AID06</td>
+                        <td>HRDC</td>
+                        <td>210SE11</td>
+                        <td>210SE19</td>
+                        <td>21INT02</td>
+                    </tr>
+                    <tr>
+                        <td>THU</td>
+                        <td>21CSE11</td>
+                        <td>21CSE19</td>
+                        <td>21GEN06</td>
+                        <td>211NT02</td>
+                        <td>21AID06</td>
+                        <td>21OEE13</td>
+                    </tr>
+                    <tr>
+                        <td>FRI</td>
+                        <td>21INTP1 (LAB)</td>
+                        <td>21INTP1 (LAB)</td>
+                        <td>HRDC</td>
+                        <td>211NT02</td>
+                        <td>21CSE19</td>
+                        <td>21CSE11</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h2 class="section-title">Course Details</h2>
+        
+        <!-- Theory Courses -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="6" style="background-color: #c5cae9;">THEORY</th>
+                    </tr>
+                    <tr>
+                        <th>S. NO</th>
+                        <th>COURSE CODE</th>
+                        <th>COURSE NAME</th>
+                        <th>NAME OF THE FACULTY</th>
+                        <th>INITIAL</th>
+                        <th>NO. OF HOURS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>210EE13</td>
+                        <td>Sensors and Transducers</td>
+                        <td>New Faculty 6/ECE</td>
+                        <td>NF6</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>211NT02</td>
+                        <td>Web Programming</td>
+                        <td>Mrs.KTamilselvi / AP / AI&DS</td>
+                        <td>KT</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>21CSE11</td>
+                        <td>Computer Networks</td>
+                        <td>Ms.M.Kanimachi / AP/AI&DS</td>
+                        <td>MK</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>21AID06</td>
+                        <td>Algorithm for Intelligent Systems</td>
+                        <td>Ms.S.Satiyya / AP / AI&DS</td>
+                        <td>SAT</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>21CSE19</td>
+                        <td>Augmented Reality</td>
+                        <td>Dr.A.Kovalan / ASP / AI&DS</td>
+                        <td>AK</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>21GEN06</td>
+                        <td>Disaster Management</td>
+                        <td>Dr.P.G.Sam Infant Jones / AP / Mech</td>
+                        <td>PG</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>-</td>
+                        <td>HRDC</td>
+                        <td></td>
+                        <td></td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Practical Courses -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="6" style="background-color: #c5cae9;">PRACTICAL</th>
+                    </tr>
+                    <tr>
+                        <th>S. NO</th>
+                        <th>COURSE CODE</th>
+                        <th>COURSE NAME</th>
+                        <th>NAME OF THE FACULTY</th>
+                        <th>INITIAL</th>
+                        <th>NO. OF HOURS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>8</td>
+                        <td>21INTP1</td>
+                        <td>Web Programming Lab</td>
+                        <td>Mrs.N.Radha / AP / AI&DS</td>
+                        <td>NR</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>21ENGP3</td>
+                        <td>Professional Communication Lab</td>
+                        <td>Mr. R. Ranjith Kumar/AP/ENG</td>
+                        <td>RR</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 College Timetable System. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile navigation toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = event.target.closest('.nav-container');
+            if (!isClickInsideNav) {
+                document.querySelector('.nav-links').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

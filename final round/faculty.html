@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Showcase</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f6fc;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin: 30px 0 20px;
+      padding: 12px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      border-radius: 10px;
+      font-size: 26px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .faculty-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .faculty-card {
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      text-align: center;
+      padding: 20px;
+      width: 240px;
+      transition: transform 0.3s ease;
+    }
+
+    .faculty-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .faculty-card img {
+      width: 160px;
+      height: 160px;
+      border-radius: 15px;
+      object-fit: cover;
+      margin-bottom: 15px;
+      background: #eef3fa;
+      border: 6px double #2575fc;
+      box-shadow: inset -3px -3px 6px #a1c4fd, inset 3px 3px 6px #2575fc;
+    }
+
+    .faculty-card input {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 8px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      text-align: center;
+    }
+
+    .faculty-card input:focus {
+      border-color: #2575fc;
+      box-shadow: 0px 0px 5px #6a11cb;
+    }
+
+    .faculty-card label {
+      font-size: 14px;
+      color: #444;
+      display: block;
+      margin-bottom: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dean Section -->
+  <h2>Dean</h2>
+  <div class="faculty-section">
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1757612700/IMG-20250911-WA0022_eygets.jpg" alt="Dean Image">
+      <input type="text" placeholder="Dr.V.Sekar">
+      <label>E-mail id</label>
+      <input type="text" placeholder="ABG@gmail.com">
+    </div>
+  </div>
+
+  <!-- Associate Dean Section -->
+  <h2>Associate Dean</h2>
+  <div class="faculty-section">
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1757612698/IMG-20250911-WA0024_lo3b9l.jpg" alt="Associate Dean Image">
+      <input type="text" placeholder="Dr.N.shanmugapriya">
+      <label>E-Mail id</label>
+      <input type="text" placeholder="ABC@gmail.com">
+    </div>
+  </div>
+
+  <!-- HOD Section -->
+  <h2>HOD</h2>
+  <div class="faculty-section">
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1757612698/IMG-20250911-WA0023_iw3w9d.jpg" alt="HOD Image">
+      <input type="text" placeholder="Dr.S.padmapriya">
+      <label>E-Mail id</label>
+      <input type="text" placeholder="hod@gmail.com">
+    </div>
+  </div>
+
+  <!-- Mentors Section -->
+  <h2>Mentors</h2>
+  <div class="faculty-section">
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/Mrs__M__Kanimozhi_gxwgpt.jpg" alt="Mentor Image">
+      <input type="text" placeholder="Mrs.M.Kanimozhi">
+      <label>E-Mail id</label>
+      <input type="text" placeholder="hij@gmail.com">
+    </div>
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1757606993/IMG-20250911-WA0010_ylrgde.jpg" alt="Mentor Image">
+      <input type="text" placeholder="Mr.Kannan">
+      <label>E-Mail id</label>
+      <input type="text" placeholder="hgf@gamil.com">
+    </div>
+  </div>
+
+  <!-- Faculty Section -->
+  <h2>Faculty</h2>
+  <div class="faculty-section">
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1757607004/IMG-20250911-WA0012_h0dr3e.jpg" alt="Faculty Image">
+      <input type="text" placeholder="Dr.M.Anu">
+      <label>E-Mail id</label>
+      <input type="text" placeholder="abc.@gmail.com">
+    </div>
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1757607004/IMG-20250911-WA0013_milm8u.jpg" alt="Faculty Image">
+      <input type="text" placeholder="Dr.R.Nathiya">
+      <label>E-Mail id</label>
+      <input type="text" placeholder="def.gmail.com">
+    </div>
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1757607002/IMG-20250911-WA0011_owluoj.jpg" alt="Faculty Image">
+      <input type="text" placeholder="Ms.Sathiya">
+      <label>E-Mail id</label>
+      <input type="text" placeholder="sdfgmail.com">
+    </div>
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1757606994/IMG-20250911-WA0009_pdv1k0.jpg" alt="Faculty Image">
+      <input type="text" placeholder="Dr.A.kovalan">
+      <label>E-mail id</label>
+      <input type="text" placeholder="ghj gamil.com">
+    </div>
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/Mrs__M__Kanimozhi_gxwgpt.jpg" alt="Faculty Image">
+      <input type="text" placeholder="Mrs.M.Kanimozhi">
+      <label>E-Mail id</label>
+      <input type="text" placeholder="kljgmail.com">
+    </div>
+    <div class="faculty-card">
+      <img src="https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/TAMILSELVI_PHOTO1_cf8axq.jpg" alt="Faculty Image">
+      <input type="text" placeholder="Mrs.K.Tamilselvi">
+      <label>E-Mail id</label>
+      <input type="text" placeholder="abd gmail.com">
+      </div>
+
+</body>
+</html>

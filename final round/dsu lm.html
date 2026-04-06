@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .source-item:hover .actions-btn {
+            opacity: 1;
+        }
+
+        .chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .loader {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #FFF;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        .btn-loader {
+            width: 16px;
+            height: 16px;
+            border: 2px solid currentColor;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="flex h-screen text-gray-800">
+
+    <!-- Left Panel: Sources -->
+    <div class="w-1/3 max-w-sm bg-white border-r border-gray-200 flex flex-col p-4">
+        <header class="mb-4">
+            <h1 class="text-2xl font-bold text-gray-900">DSU LM </h1>
+            <p class="text-sm text-gray-500">Your personal AI research assistant</p>
+        </header>
+
+        <div class="mb-4">
+            <label for="file-upload" class="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg cursor-pointer hover:bg-blue-700 transition-colors">
+                <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                <span>Add Source</span>
+            </label>
+            <input id="file-upload" type="file" class="hidden" multiple accept=".txt,.md">
+        </div>
+
+        <div class="flex-grow overflow-y-auto pr-2">
+            <h2 class="text-lg font-semibold mb-2 text-gray-800">Sources</h2>
+            <div id="sources-list" class="space-y-2">
+                <!-- Source items will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <footer class="text-xs text-gray-400 mt-4 text-center">
+            Built with Gemini & Tailwind CSS
+        </footer>
+    </div>
+
+    <!-- Right Panel: Chat -->
+    <div class="w-2/3 flex flex-col bg-gray-100">
+        <div id="chat-container" class="flex-grow p-6 overflow-y-auto chat-container">
+            <div id="chat-messages" class="space-y-6">
+                <!-- Welcome Message -->
+                <div class="flex items-start gap-4">
+                    <div
+                        class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm max-w-2xl">
+                        <p class="font-semibold text-blue-600 mb-1">AI Assistant</p>
+                        <p>Hello! I'm your research assistant. Add a source document (.txt or .md) to get started. Use
+                            the buttons on each source to ✨ summarize it or get ✨ suggested questions!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="p-6 bg-white border-t border-gray-200">
+            <div id="suggested-questions-container" class="flex flex-wrap gap-2 mb-2"></div>
+            <div class="flex items-center bg-gray-100 rounded-lg p-2">
+                <input type="text" id="chat-input" placeholder="Ask a question about your sources..." class="w-full bg-transparent border-none focus:ring-0 text-gray-800 placeholder-gray-500 px-2">
+                <button id="send-button" class="bg-blue-600 text-white rounded-lg p-2 ml-2 hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed">
+                     <i data-lucide="send" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast"
+        class="fixed top-5 right-5 bg-red-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 translate-y-10 transition-all duration-300">
+        <p id="toast-message"></p>
+    </div>
+
+
+    <script>
+        const fileUpload = document.getElementById('file-upload');
+        const sourcesList = document.getElementById('sources-list');
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.getElementById('send-button');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatContainer = document.getElementById('chat-container');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        const suggestedQuestionsContainer = document.getElementById('suggested-questions-container');
+
+        let sources = {
+            "Welcome.txt": "This is a sample document. You can upload your own text or markdown files to begin your research. Once you've uploaded a file, you can ask questions about its content. For example: 'Summarize this document.' The AI will then generate a response based on the information within your sources."
+        };
+
+        lucide.createIcons();
+        
+        // --- Source Management ---
+        const renderSources = () => {
+            sourcesList.innerHTML = '';
+            if (Object.keys(sources).length === 0) {
+                 sourcesList.innerHTML = '<p class="text-sm text-gray-400 text-center">No sources added yet.</p>';
+                 return;
+            }
+            for (const filename of Object.keys(sources)) {
+                const sourceElement = document.createElement('div');
+                sourceElement.className = 'source-item bg-gray-50 p-3 rounded-lg flex justify-between items-center text-sm';
+                sourceElement.innerHTML = `
+                    <div class="flex items-center overflow-hidden mr-2">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-2 text-gray-500 flex-shrink-0"></i>
+                        <span class="truncate font-medium">${filename}</span>
+                    </div>
+                    <div class="flex items-center space-x-1 flex-shrink-0">
+                        <button class="actions-btn opacity-100 sm:opacity-0 transition-opacity text-gray-500 hover:text-blue-600 p-1 summarize-btn" data-filename="${filename}" title="✨ Summarize Source">
+                            <i data-lucide="align-center" class="w-4 h-4"></i>
+                        </button>
+                        <button class="actions-btn opacity-100 sm:opacity-0 transition-opacity text-gray-500 hover:text-blue-600 p-1 suggest-btn" data-filename="${filename}" title="✨ Suggest Questions">
+                            <i data-lucide="help-circle" class="w-4 h-4"></i>
+                        </button>
+                        <button class="actions-btn opacity-100 sm:opacity-0 transition-opacity text-gray-500 hover:text-red-500 p-1 delete-btn" data-filename="${filename}" title="Delete Source">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+                sourcesList.appendChild(sourceElement);
+                lucide.createIcons();
+            }
+        };
+
+        fileUpload.addEventListener('change', (event) => {
+            const files = event.target.files;
+            if (!files) return;
+
+            for (const file of files) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    sources[file.name] = e.target.result;
+                    renderSources();
+                };
+                reader.readAsText(file);
+            }
+            event.target.value = null;
+        });
+        
+        sourcesList.addEventListener('click', async (event) => {
+            const button = event.target.closest('button');
+            if (!button) return;
+
+            const filename = button.dataset.filename;
+            if (!filename) return;
+
+            if (button.classList.contains('delete-btn')) {
+                delete sources[filename];
+                renderSources();
+                showToast(`Source "${filename}" removed.`);
+            } else if (button.classList.contains('summarize-btn')) {
+                await handleSummarizeSource(filename, button);
+            } else if (button.classList.contains('suggest-btn')) {
+                await handleSuggestQuestions(filename, button);
+            }
+        });
+
+        // --- Chat Functionality ---
+        const addMessage = (sender, message, options = {}) => {
+            const messageWrapper = document.createElement('div');
+            const icon = sender === 'user' 
+                ?` <div class="flex-shrink-0 w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center"><i data-lucide="user" class="w-5 h-5"></i></div>`
+                :` <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center"><i data-lucide="sparkles" class="w-5 h-5"></i></div>`;
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'bg-white p-4 rounded-lg shadow-sm max-w-2xl';
+            
+            const senderName = options.filename ?` AI Assistant (about ${options.filename})` : (sender === 'user' ? 'You' : 'AI Assistant');
+            const senderColor = sender === 'user' ? 'text-gray-700' : 'text-blue-600';
+            messageContent.innerHTML =` <p class="font-semibold mb-1 ${senderColor}">${senderName}</p>`;
+
+            let formattedMessage = message.replace(/\n/g, '<br>');
+            
+            const messageText = document.createElement('p');
+            messageText.innerHTML = formattedMessage;
+            messageContent.appendChild(messageText);
+            
+            messageWrapper.className = `flex items-start gap-4 ${sender === 'user' ? 'justify-end' : ''}`;
+            
+            if (sender === 'user') {
+                 messageWrapper.appendChild(messageContent);
+                 messageWrapper.innerHTML += icon;
+            } else {
+                 messageWrapper.innerHTML = icon;
+                 messageWrapper.appendChild(messageContent);
+            }
+            
+            chatMessages.appendChild(messageWrapper);
+            lucide.createIcons();
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            return messageContent;
+        };
+
+        const handleSend = async () => {
+            const query = chatInput.value.trim();
+            if (!query) return;
+
+            if (Object.keys(sources).length === 0) {
+                showToast("Please add at least one source before asking a question.", "error");
+                return;
+            }
+            
+            suggestedQuestionsContainer.innerHTML = ''; // Clear suggestions
+            addMessage('user', query);
+            chatInput.value = '';
+            sendButton.disabled = true;
+            sendButton.innerHTML = <span class="loader"></span>;
+            lucide.createIcons();
+            
+            const aiMessageContent = addMessage('ai', '<span class="text-gray-400">Thinking...</span>');
+
+            try {
+                const prompt = "You are a helpful research assistant. Based on the following sources, please answer the user's question. Your answer should be grounded in the information provided in the sources.";
+                const modelResponse = await generateTextContent(prompt, query);
+                aiMessageContent.querySelector('p:last-child').innerHTML = modelResponse.replace(/\n/g, '<br>');
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                aiMessageContent.querySelector('p:last-child').innerHTML = <span class="text-red-500">Sorry, something went wrong. Please check the console for details.</span>;
+            } finally {
+                sendButton.disabled = false;
+                sendButton.innerHTML = <i data-lucide="send" class="w-5 h-5"></i>;
+                lucide.createIcons();
+            }
+        };
+        
+        // --- Gemini-powered Features ---
+        const handleSummarizeSource = async (filename, button) => {
+            const originalIcon = button.innerHTML;
+            button.innerHTML = <span class="btn-loader"></span>;
+            button.disabled = true;
+
+            const aiMessageContent = addMessage('ai', <span class="text-gray-400">Summarizing ${filename}...</span>, { filename });
+            
+            try {
+                const prompt = "Please provide a concise, one-paragraph summary of the following document.";
+                const modelResponse = await generateTextContent(prompt, null, { [filename]: sources[filename] });
+                aiMessageContent.querySelector('p:last-child').innerHTML = modelResponse.replace(/\n/g, '<br>');
+            } catch (error) {
+                console.error("Summarization error:", error);
+                 aiMessageContent.querySelector('p:last-child').innerHTML = <span class="text-red-500">Could not summarize ${filename}.</span>;
+            } finally {
+                button.innerHTML = originalIcon;
+                button.disabled = false;
+                lucide.createIcons();
+            }
+        };
+
+        const handleSuggestQuestions = async (filename, button) => {
+            const originalIcon = button.innerHTML;
+            button.innerHTML = <span class="btn-loader"></span>;
+            button.disabled = true;
+            suggestedQuestionsContainer.innerHTML = '';
+
+            try {
+                const prompt = `Based on the following document, generate three insightful and distinct questions a user might ask to better understand the content.`;
+                const systemInstruction = `You MUST return the questions as a valid JSON array of strings, like this: ["question 1", "question 2", "question 3"]`;
+                const modelResponse = await generateJsonContent(prompt, { [filename]: sources[filename] }, systemInstruction);
+                
+                if (modelResponse && Array.isArray(modelResponse)) {
+                    displaySuggestedQuestions(modelResponse);
+                    showToast(`✨ Questions suggested for ${filename}!`, 'info');
+                } else {
+                     throw new Error("Invalid format for suggested questions.");
+                }
+            } catch (error) {
+                console.error("Suggestion error:", error);
+                showToast(`Could not suggest questions for ${filename}.`, 'error');
+            } finally {
+                button.innerHTML = originalIcon;
+                button.disabled = false;
+                lucide.createIcons();
+            }
+        };
+        
+        const displaySuggestedQuestions = (questions) => {
+            suggestedQuestionsContainer.innerHTML = '';
+            questions.forEach(q => {
+                const button = document.createElement('button');
+                button.className = "bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full hover:bg-blue-200 transition-colors";
+                button.textContent = q;
+                button.onclick = () => {
+                    chatInput.value = q;
+                    handleSend();
+                };
+                suggestedQuestionsContainer.appendChild(button);
+            });
+        };
+
+
+        // --- Gemini API Calls ---
+        async function callGeminiAPI(payload) {
+            const apiKey = ""; // Leave this as is
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            let retries = 3;
+            let delay = 1000;
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                     if (!response.ok) {
+                        if (response.status === 429 || response.status >= 500) {
+                           if (i < retries - 1) {
+                               await new Promise(res => setTimeout(res, delay));
+                               delay *= 2;
+                               continue;
+                           }
+                        }
+                        throw new Error(`API request failed with status ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    if (i === retries - 1) throw error;
+                }
+            }
+        }
+
+        const generateTextContent = async (prompt, userQuery, contextSources = sources) => {
+             let context = `${prompt}\n\n--- SOURCES ---\n\n`;
+            for(const [filename, content] of Object.entries(contextSources)) {
+                context += `Source: ${filename}\nContent: ${content}\n\n`;
+            }
+            context +=` --- END SOURCES ---\n\n`;
+            if (userQuery) {
+                context += "User Question: " + userQuery;
+            }
+
+            const payload = { contents: [{ parts: [{ text: context }] }] };
+            const result = await callGeminiAPI(payload);
+
+            if (result.candidates && result.candidates[0]?.content.parts[0].text) {
+                return result.candidates[0].content.parts[0].text;
+            } else {
+                 let reason = result.promptFeedback?.blockReason || "unknown reason";
+                 throw new Error(`Could not generate content. Reason: ${reason}`);
+            }
+        };
+        
+        const generateJsonContent = async (prompt, contextSources, systemInstruction) => {
+            let context = $`{prompt}\n\n--- DOCUMENT ---\n\n`;
+            for(const [filename, content] of Object.entries(contextSources)) {
+                context +=` Source: ${filename}\nContent: ${content}\n\n`;
+            }
+            context += `--- END DOCUMENT ---`;
+            
+            const payload = {
+                contents: [{ parts: [{ text: context }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "ARRAY",
+                        items: { type: "STRING" }
+                    }
+                }
+            };
+            const result = await callGeminiAPI(payload);
+
+            if (result.candidates && result.candidates[0]?.content.parts[0].text) {
+                try {
+                    return JSON.parse(result.candidates[0].content.parts[0].text);
+                } catch (e) {
+                    console.error("Failed to parse JSON response:", e);
+                    throw new Error("Invalid JSON from API.");
+                }
+            } else {
+                 let reason = result.promptFeedback?.blockReason || "unknown reason";
+                 throw new Error(`Could not generate content. Reason: ${reason}`);
+            }
+        };
+
+        // --- Event Listeners and Initialisation ---
+        sendButton.addEventListener('click', handleSend);
+        chatInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                handleSend();
+            }
+        });
+
+        function showToast(message, type = 'info') {
+            toastMessage.textContent = message;
+            toast.className = toast.className.replace(/bg-(red|green|blue)-500/g, ''); // remove old color
+            toast.classList.add(type === 'error' ? 'bg-red-500' : (type === 'info' ? 'bg-blue-500' : 'bg-green-500'));
+            toast.classList.remove('opacity-0', 'translate-y-10');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-10');
+            }, 3000);
+        }
+
+        renderSources();
+    </script>
+</body>
+
+</html>

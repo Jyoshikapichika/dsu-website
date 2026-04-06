@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Student Dashboard</title>
+  <style>
+    body {
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f8ff;
+    }
+    nav {
+      background:hsl(216, 90%, 41%);
+      color:white;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    nav .menu {
+      display:flex;
+      gap:15px;
+    }
+    nav a {
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+      padding:6px 10px;
+      border-radius:6px;
+      transition:0.2s;
+    }
+    nav a:hover {
+      background:#66b2ff;
+      box-shadow:0 0 12px rgba(240,180,41,0.7);
+    }
+    .container {
+      max-width:900px;
+      margin:20px auto;
+      background:white;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.1);
+    }
+    h2 {color:#0b57c7;margin-top:0;}
+    .info {margin:10px 0;}
+    .label {font-weight:bold;color:#333;}
+  </style>
+</head>
+<body>
+  <nav>
+    <div><strong>DSU Student Portal</strong></div>
+    <div class="menu">
+      <a href="syllabus.html">Syllabus</a>
+      <a href="faculty.html">Faculty</a>
+      <a href="attendance.html">Attendance</a>
+      <a href="timetable.html">Time Table</a>
+      <a href="leave.html">Leave</a>
+      <a href="od.html">OD Letters</a>
+      <a href="billing.html">Billing</a>
+      <a href="dsu lm.html"> Personal assistent</a>
+    </div>
+
+  </nav>
+
+  <div class="container">
+    <h2>Student Profile</h2>
+    <div class="info"><span class="label">Name:</span> Pichika Venkateswarlu Jyoshika</div>
+    <div class="info"><span class="label">Status:</span> Active</div>
+    <div class="info"><span class="label">Admission No:</span> 42244</div>
+    <div class="info"><span class="label">Admission Year:</span> 2023 - 2024</div>
+    <div class="info"><span class="label">Roll No:</span> 11523050515</div>
+    <div class="info"><span class="label">Degree:</span> Undergraduate</div>
+    <div class="info"><span class="label">Department:</span> Artificial Intelligence (AI) & Data Science (DS)</div>
+    <div class="info"><span class="label">Semester:</span> 5</div>
+    <div class="info"><span class="label">Section:</span> 123A8</div>
+    <div class="info"><span class="label">Course:</span> B.Tech Artificial Intelligence & Data Science</div>
+    <div class="info"><span class="label">DOB:</span> 15-06-2006</div>
+    <div class="info"><span class="label">Age:</span> 18</div>
+    <div class="info"><span class="label">Gender:</span> Female</div>
+    <div class="info"><span class="label">Father's Name:</span> P. Venkateswarlu</div>
+    <div class="info"><span class="label">Mother's Name:</span> G. Sonietha</div>
+    <div class="info"><span class="label">Address:</span> Kaikala Street, D.No. 8-41/1, Srikalahasti, Tirupati, Andhra Pradesh</div>
+  </div>
+
+  <script>
+    // Check if logged in
+    if(localStorage.getItem("loggedIn")!=="true"){
+      window.location.href = "login.html";
+    }
+
+    // Logout
+    document.getElementById("logout").addEventListener("click", ()=>{
+      localStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

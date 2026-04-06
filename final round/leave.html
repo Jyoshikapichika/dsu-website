@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Form - Campus Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white border-b shadow-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
+      <div class="flex items-center gap-2 font-bold text-lg">
+        <span>leave form</span>
+      </div>
+      <nav class="hidden md:flex gap-4">
+        <a href="dashboard.html" class="hover:text-blue-600">Home</a>
+        <a href="attendance.html" class="hover:text-blue-600">Attendance</a>
+        <a href="timetable.html" class="hover:text-blue-600">Time Table</a>
+        <a href="od.html" class="hover:text-blue-600">OD Letters</a>
+        <a href="billing.html" class="hover:text-blue-600">Billing</a>
+      </nav>
+      <button class="md:hidden px-3 py-2 border rounded" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">☰</button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden flex flex-col bg-white border-t p-4 space-y-2">
+      <a href="#" class="hover:text-blue-600">Home</a>
+      <a href="#" class="hover:text-blue-600">Attendance</a>
+      <a href="#" class="hover:text-blue-600">Time Table</a>
+      <a href="#" class="hover:text-blue-600">OD Letters</a>
+      <a href="#" class="hover:text-blue-600">Billing</a>
+    </div>
+  </header>  <!-- Leave Form -->  <main class="flex-1 flex items-center justify-center p-4">
+    <form class="bg-white w-full max-w-2xl rounded-2xl shadow p-6 space-y-6">
+      <h1 class="text-xl font-semibold text-center text-white bg-blue-500 rounded-xl py-2">Leave Form</h1><!-- Profile -->
+  <div class="flex items-center gap-4">
+    </div>
+      <p class="font-bold">pichika Venkateswarlu Jyoshika</p>
+      <p class="text-sm text-gray-500">23A8 | Semester-5</p>
+    </div>
+  </div>
+
+  <!-- Leave Type -->
+  <div>
+    <label class="block text-sm font-medium mb-1">Leave Type</label>
+    <select class="w-full border rounded-xl p-2">
+      <option>Medical Leave</option>
+      <option>Casual Leave</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <!-- Dates -->
+  <div class="grid md:grid-cols-2 gap-4">
+    <div>
+      <label class="block text-sm font-medium mb-1">From Date</label>
+      <input type="date" class="w-full border rounded-xl p-2" required>
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">To Date</label>
+      <input type="date" class="w-full border rounded-xl p-2" required>
+    </div>
+  </div>
+
+  <!-- Half Day -->
+  <div class="flex items-center gap-2">
+    <input type="checkbox" id="halfday" class="rounded">
+    <label for="halfday" class="text-sm">Half day</label>
+  </div>
+
+  <!-- Reason -->
+  <div>
+    <label class="block text-sm font-medium mb-1">Enter the reason</label>
+    <textarea class="w-full border rounded-xl p-2 min-h-[100px]" placeholder="Type your reason here..." required></textarea>
+  </div>
+
+  <!-- Attachments -->
+  <div>
+    <h3 class="text-lg font-semibold mb-2">Attachments</h3>
+    <label for="file" class="flex flex-col items-center justify-center gap-2 border-2 border-dashed rounded-xl p-6 cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 15.75h18m-18 0a2.25 2.25 0 01-2.25-2.25v-9A2.25 2.25 0 013 2.25h18A2.25 2.25 0 0123.25 4.5v9a2.25 2.25 0 01-2.25 2.25m-18 0V21a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021.75 21v-5.25" />
+      </svg>
+      <p class="text-sm text-gray-500">Click to upload (max 20MB)</p>
+      <input id="file" type="file" class="hidden" accept=".xlsx,.doc,.docx,.png,.jpeg,.jpg,.pdf,.zip">
+    </label>
+    <p class="mt-2 text-xs text-gray-500 text-center">The maximum file size allowed is 20MB. Supported formats are xlsx, doc, docx, png, jpeg, jpg, pdf, and zip file.</p>
+  </div>
+
+  <!-- Actions -->
+  <div class="flex justify-end gap-3">
+    <button type="reset" class="px-4 py-2 border rounded-xl">Cancel</button>
+    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-xl">Apply</button>
+  </div>
+</form>
+
+  </main>  <footer class="text-center text-xs text-gray-500 py-6">© <script>document.write(new Date().getFullYear())</script> Campus Portal. All rights reserved.</footer>
+</body>
+</html>

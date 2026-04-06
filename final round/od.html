@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OD Request System</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    /* General Page */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    h2 {
+      color: #34495e;
+      border-left: 5px solid #3498db;
+      padding-left: 10px;
+      margin-top: 25px;
+      font-size: 1.4rem;
+    }
+
+    /* Form Sections */
+    .form-section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #2c3e50;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      font-size: 14px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 5px rgba(52,152,219,0.3);
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    /* Buttons */
+    .button-group {
+      text-align: center;
+      margin: 20px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .button-group button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.3s;
+      flex: 1 1 auto;
+      min-width: 150px;
+      max-width: 220px;
+    }
+
+    .button-group button:hover {
+      background: #2980b9;
+    }
+
+    .button-group button:active {
+      transform: scale(0.97);
+    }
+
+    /* Letter Preview */
+    .letter-preview {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 150px;
+      margin-top: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+
+    .letter-preview h3 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      .form-section {
+        padding: 15px;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        font-size: 13px;
+        padding: 8px;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .button-group button {
+        width: 100%;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>OD Request System</h1>
+
+  <!-- Student Information -->
+  <div class="form-section">
+    <h2>Student Information</h2>
+    <div class="form-group"><label>Full Name</label> <input type="text" id="studentName"></div>
+    <div class="form-group"><label>Register Number</label> <input type="text" id="regNo"></div>
+    <div class="form-group"><label>Year & Section</label> <input type="text" id="yearSec"></div>
+    <div class="form-group"><label>Your Email</label> <input type="email" id="studentEmail"></div>
+  </div>
+
+  <!-- OD Details -->
+  <div class="form-section">
+    <h2>OD Request Details</h2>
+    <div class="form-group"><label>Purpose of OD</label> <input type="text" id="purpose"></div>
+    <div class="form-group"><label>Venue / Organization</label> <input type="text" id="venue"></div>
+    <div class="form-group"><label>Date(s)</label> <input type="text" id="dates"></div>
+    <div class="form-group"><label>Time</label> <input type="text" id="time"></div>
+    <div class="form-group"><label>Additional Info</label> <textarea id="additionalInfo"></textarea></div>
+  </div>
+
+  <!-- Approval Workflow -->
+  <div class="form-section">
+    <h2>Approval Workflow</h2>
+    <div class="form-group"><label>Mentor Email</label> <input type="email" id="mentorEmail"></div>
+    <div class="form-group"><label>HOD Email</label> <input type="email" id="hodEmail"></div>
+  </div>
+
+  <div class="button-group">
+    <button onclick="generateLetter()">📄 Generate Letter</button>
+    <button onclick="downloadPDF()">📥 Download PDF</button>
+    <button onclick="sendEmail()">✉ Send via Email</button>
+  </div>
+
+  <!-- Preview -->
+  <h2>Letter Preview</h2>
+  <div class="letter-preview" id="output">Your OD request letter will appear here...</div>
+
+  <script>
+    // Initialize EmailJS
+    (function(){ emailjs.init("4uELUcESq-faGXVYM"); })();
+
+    let generatedLetter = "";
+
+    function generateLetter() {
+      const studentName = document.getElementById("studentName").value;
+      const regNo = document.getElementById("regNo").value;
+      const yearSec = document.getElementById("yearSec").value;
+      const purpose = document.getElementById("purpose").value;
+      const venue = document.getElementById("venue").value;
+      const dates = document.getElementById("dates").value;
+      const time = document.getElementById("time").value;
+      const additional = document.getElementById("additionalInfo").value;
+
+      generatedLetter = `
+        <h3>On-Duty Request Letter</h3>
+        <p>Respected Sir/Madam,</p>
+        <p>I, <b>${studentName}</b> (Reg. No: ${regNo}, ${yearSec}), request permission 
+        to attend <b>${purpose}</b> at <b>${venue}</b> on <b>${dates}</b> during <b>${time}</b>.</p>
+        <p>${additional}</p>
+        <p>Thank you,<br>${studentName}</p>
+      `;
+
+      document.getElementById("output").innerHTML = generatedLetter;
+    }
+
+    function downloadPDF() {
+      if (!generatedLetter) return alert("Please generate letter first.");
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.html(document.getElementById("output"), {
+        callback: function (pdf) {
+          pdf.save("OD_Request.pdf");
+        },
+        x: 10, y: 10
+      });
+    }
+
+    function sendEmail() {
+      if (!generatedLetter) return alert("Please generate letter first.");
+
+      const templateParams = {
+        mentor_email: document.getElementById("mentorEmail").value,
+        hod_email: document.getElementById("hodEmail").value,
+        student_name: document.getElementById("studentName").value,
+        regno: document.getElementById("regNo").value,
+        yearsec: document.getElementById("yearSec").value,
+        od_letter: generatedLetter,
+        approve_link: "https://example.com/approve",
+        reject_link: "https://example.com/reject"
+      };
+
+      emailjs.send("service_ml8xhoe", "template_dw9ye4p", templateParams)
+        .then(() => { alert("OD Request sent successfully!"); })
+        .catch(err => { console.error(err); alert("Failed to send email"); });
+    }
+  </script>
+</body>
+</html>

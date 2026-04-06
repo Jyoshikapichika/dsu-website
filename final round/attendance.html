@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #2196f3;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      width: 100%;
+      background: #192d3e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .navbar .menu {
+      display: flex;
+      gap: 15px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .navbar a:hover {
+      background: #0d2034;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 3px;
+    }
+
+    /* Mobile menu */
+    .menu.active {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 55px;
+      left: 0;
+      width: 100%;
+      background: #192d3e;
+      padding: 10px 0;
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        width: 100%;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .container {
+      width: 95%;
+      max-width: 420px;
+      background: white;
+      color: black;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      margin-top: 70px; /* space for navbar */
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .percentage {
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: bold;
+      color: green;
+      margin: 20px 0;
+    }
+
+    .btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 50px;
+      background: #192d3e;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .btn:hover {
+      background: #0d2034;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Subject-wise progress bars */
+    .subject {
+      margin: 12px 0;
+    }
+
+    .subject-title {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background: #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 20px;
+    }
+
+    .progress {
+      height: 100%;
+      text-align: right;
+      padding-right: 5px;
+      font-size: 12px;
+      color: white;
+      line-height: 20px;
+      transition: width 0.5s ease;
+    }
+
+    /* Donut chart */
+    .chart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    svg {
+      transform: rotate(-90deg);
+    }
+
+    .center-text {
+      position: absolute;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Attendance</div>
+    <div class="menu" id="menu">
+     <a href="dashboard.html">Home</a>
+      <a href="timetable.html">Time Table</a>
+      <a href="leave.html">Leave & Gate Pass</a>
+      <a href="od.html">OD Letters</a>
+      <a href="billing.html">Billing</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <!-- First Screen -->
+  <div class="container" id="screen1">
+    <h1>Semester-5 (2025-2026)</h1>
+    <p style="text-align:center">Overall Attendance</p>
+    <div class="percentage" id="overall">--%</div>
+
+    <!-- Subject-wise bars will be inserted here -->
+    <div id="subjects"></div>
+  </div>
+
+  <!-- Second Screen -->
+  <div class="container hidden" id="screen2">
+    <h1>Attendance Summary</h1>
+    <div class="chart">
+      <svg width="200" height="200" viewBox="0 0 36 36">
+        <!-- Present arc -->
+        <path id="donutPresent"
+          stroke-dasharray="0, 100"
+          stroke="#4caf50"
+          stroke-width="3"
+          fill="none"
+          d="M18 2.0845
+             a 15.9155 15.9155 0 0 1 0 31.831
+             a 15.9155 15.9155 0 0 1 0 -31.831"
+        />
+        <!-- Absent arc -->
+        <path id="donutAbsent"
+          stroke-dasharray="0, 100"
+          stroke="#f44336"
+          stroke-width="3"
+          fill="none"
+          d="M18 2.0845
+             a 15.9155 15.9155 0 0 1 0 31.831
+             a 15.9155 15.9155 0 0 1 0 -31.831"
+        />
+      </svg>
+      <div class="center-text" id="donutCenter"></div>
+    </div>
+    <button class="btn" style="left:20px; right:auto;" onclick="goBack()">Back</button>
+  </div>
+
+  <script>
+    // Attendance data
+    const subjects = [
+      { name: "Training and Placement", percent: 91 },
+      { name: "HRDC02", percent: 75 },
+      { name: "HRDC01", percent: 100 },
+      { name: "21OEE13", percent: 90 },
+      { name: "21NTP1", percent: 60 },
+      { name: "21INT02", percent: 74 },
+      { name: "21GEN06", percent: 89 },
+      { name: "21ENGP3", percent: 80 },
+      { name: "21CSE19", percent: 84 },
+      { name: "21CSE11", percent: 79 },
+      { name: "21AID06", percent: 89 }
+    ];
+
+    // Pick color based on percentage
+    function getColor(percent) {
+      if (percent >= 85) return "#4caf50"; // green
+      if (percent >= 70) return "#ff9800"; // orange
+      return "#f44336"; // red
+    }
+
+    // Calculate overall attendance
+    const overall = Math.round(
+      subjects.reduce((sum, s) => sum + s.percent, 0) / subjects.length
+    );
+    const absent = 100 - overall;
+
+    document.getElementById("overall").textContent = overall + "%";
+
+    // Render subject bars dynamically
+    const subjectsContainer = document.getElementById("subjects");
+    subjects.forEach(s => {
+      const div = document.createElement("div");
+      div.classList.add("subject");
+      div.innerHTML = `
+        <div class="subject-title">${s.name} (${s.percent}%)</div>
+        <div class="progress-bar">
+          <div class="progress" style="width:${s.percent}%; background:${getColor(s.percent)}">
+            ${s.percent}%
+          </div>
+        </div>
+      `;
+      subjectsContainer.appendChild(div);
+    });
+
+    // Switch between screens
+    function showSummary() {
+      document.getElementById("screen1").classList.add("hidden");
+      document.getElementById("screen2").classList.remove("hidden");
+
+      document.getElementById("donutPresent").setAttribute(`"stroke-dasharray", ${overall}, 100`);
+      document.getElementById("donutAbsent").setAttribute(`"stroke-dasharray", ${absent}, 100`);
+      document.getElementById("donutAbsent").setAttribute("stroke-dashoffset", -overall);
+
+      document.getElementById("donutCenter").innerHTML = `
+        <div style="color:#4caf50">Present: ${overall}%</div>
+        <div style="color:#f44336">Absent: ${absent}%</div>
+      `;
+    }
+
+    function goBack() {
+      document.getElementById("screen2").classList.add("hidden");
+      document.getElementById("screen1").classList.remove("hidden");
+    }
+
+    // Navbar hamburger toggle
+    const hamburger = document.getElementById("hamburger");
+    const menu = document.getElementById("menu");
+
+    hamburger.addEventListener("click", () => {
+      menu.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>

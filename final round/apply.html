@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Admission Portal</title>
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    
+
+    /* Hero Banner */
+    .hero {
+      height: 50vh;
+      background: url('https://images.unsplash.com/photo-1581090700227-4c4f50a2c06e?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+    .hero h2 {
+      font-size: 40px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 5px black;
+    }
+    .hero button {
+      padding: 12px 25px;
+      background: linear-gradient(45deg, #0077cc, #00aaff);
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      color: rgb(189, 194, 241);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .hero button:hover { transform: scale(1.1); background: linear-gradient(45deg, #005fa3, #0077cc); }
+
+    /* Form Section */
+    .container {
+      width: 70%;
+      margin: 30px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #0077cc;
+    }
+    fieldset {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    legend { font-weight: bold; color: #0077cc; }
+    label { display: block; margin: 10px 0 5px; font-weight: bold; }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      transition: border 0.3s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border: 1px solid #0077cc;
+      outline: none;
+    }
+    button.submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button.submit-btn:hover { background: #005fa3; }
+
+    /* Footer */
+    footer {
+      background: #0077cc;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Welcome to DSU College</h2>
+
+    <button onclick="document.getElementById('admissionForm').scrollIntoView({behavior:'smooth'})">Register Now</button>
+  </section>
+
+  <!-- Admission Form -->
+  <div class="container">
+    <h2>Admission Registration Form</h2>
+    <form id="admissionForm">
+      <!-- Personal Info -->
+      <fieldset>
+        <legend>Personal Information</legend>
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+        <label>Date of Birth</label>
+        <input type="date" name="dob" required>
+        <label>Gender</label>
+        <select name="gender" required>
+          <option value="">--Select--</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </fieldset>
+
+      <!-- Contact Info -->
+      <fieldset>
+        <legend>Contact Information</legend>
+        <label>Email</label>
+        <input type="email" name="email" required>
+        <label>Phone</label>
+        <input type="tel" name="phone" required pattern="[0-9]{10}">
+        <label>Address</label>
+        <textarea name="address" rows="3" required></textarea>
+      </fieldset>
+
+      <!-- Academic Info -->
+      <fieldset>
+        <legend>Academic Information</legend>
+        <label>Course Applying For</label>
+        <select name="course" required>
+          <option value="">--Select--</option>
+          <option>B.Tech - Computer Science</option>
+          <option>B.Tech - AI & DS</option>
+          <option>B.Tech - Mechanical</option>
+          <option>B.Tech - Robotics</option>
+        </select>
+        <label>Previous Qualification</label>
+        <select name="previous" required>
+          <option value="">--Select--</option>
+          <option>12th Grade (HSC)</option>
+          <option>Diploma</option>
+          <option>Other</option>
+        </select>
+        <label>Marks / Percentage</label>
+        <input type="text" name="marks" required>
+      </fieldset>
+
+      <!-- Parent Info -->
+      <fieldset>
+        <legend>Parent / Guardian Information</legend>
+        <label>Parent/Guardian Name</label>
+        <input type="text" name="parentName" required>
+        <label>Parent/Guardian Phone</label>
+        <input type="tel" name="parentPhone" required pattern="[0-9]{10}">
+      </fieldset>
+
+      <button type="submit" class="submit-btn">Submit Application</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>📍 DSU College, Trichy | 📞 +91 9876543210 | ✉ info@dsucollege.edu</p>
+    <p>&copy; 2025 DSU College. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("admissionForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      alert("🎉 Your Admission Form has been submitted successfully!");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,3698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhanalakshmi Srinivasan University - Premier Engineering Education</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a237e;
+            --secondary: #283593;
+            --accent: #ffb300;
+            --light: #f8f9fa;
+            --dark: #333;
+            --success: #2e7d32;
+            --danger: #d62229;
+            --transition: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+            color: #333;
+        }
+        
+        .btn-accent:hover {
+            background: #ffa000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .slide-in-left.appear {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .slide-in-right.appear {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .zoom-in.appear {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Top Announcement Bar */
+        .announcement-bar {
+            background: var(--danger);
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        /* Header and Navigation */
+        header {
+            background: rgb(255, 255, 255);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 80px;
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin: 0 15px;
+        }
+        
+        .nav-menu li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 16px;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav-menu li a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 35, 126, 0.8), rgba(26, 35, 126, 0.8)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3') center/cover no-repeat;
+            color: rgb(249, 224, 3);
+            text-align: center;
+            padding: 120px 5%;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: white;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        /* NAAC & NIRF Section */
+        .accreditation {
+            background: white;
+        }
+        
+        .accreditation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .accreditation-card {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .accreditation-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .accreditation-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .accreditation-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        /* Departments Section */
+        .departments {
+            background: #f8f9fa;
+        }
+        
+        .dept-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .dept-button {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 16px;
+            text-decoration: none;
+            background: white;
+            color: var(--dark);
+            padding: 22px 24px;
+            min-height: 72px;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(2,8,23,.12);
+            border: 1px solid rgba(15,23,42,.08);
+            transition: var(--transition);
+            font-size: clamp(16px, 1.4vw, 20px);
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dept-button::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at center, rgba(37,99,235,.25) 0%, transparent 70%);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 0;
+        }
+        
+        .dept-button span, .chev {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dept-button:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 16px 28px rgba(37,99,235,.35);
+            border-color: rgba(37,99,235,.45);
+        }
+        
+        .dept-button:hover::before {
+            opacity: 1;
+        }
+        
+        .dept-button:active {
+            transform: translateY(2px) scale(0.97);
+            box-shadow: inset 0 4px 12px rgba(0,0,0,.3);
+            background: var(--primary);
+            color: #fff;
+        }
+        
+        .dept-button:active .chev {
+            opacity: 1;
+            color: #fff;
+        }
+        
+        .chev {
+            margin-left: auto;
+            font-size: 20px;
+            opacity: .55;
+            transition: var(--transition);
+        }
+        
+        /* Faculty Section */
+        .faculty {
+            background: white;
+        }
+        
+        .faculty-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .faculty-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+        
+        .faculty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .faculty-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--primary);
+        }
+        
+        .faculty-info {
+            padding: 20px;
+        }
+        
+        .faculty-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        
+        .faculty-position {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .department {
+            display: inline-block;
+            background: #e7f1ff;
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+        }
+        
+        #search {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+        }
+        
+        /* Committees Section */
+        .committees {
+            background: #f8f9fa;
+        }
+        
+        .committees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .committee-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .committee-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .committee-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .committee-content {
+            padding: 20px;
+        }
+        
+        .head-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .head-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            border: 3px solid var(--primary);
+            overflow: hidden;
+        }
+        
+        .head-photo i {
+            font-size: 40px;
+            color: var(--primary);
+        }
+        
+        .head-details h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .head-details p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .committee-responsibilities {
+            margin-top: 15px;
+        }
+        
+        .committee-responsibilities h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .responsibilities-list {
+            list-style: none;
+        }
+        
+        .responsibilities-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .responsibilities-list li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: 10px;
+        }
+        
+        /* Fee Structure Section */
+        .fee-structure {
+            background: white;
+        }
+        
+        .info-bar {
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .academic-year {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .currency {
+            background: var(--secondary);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .department-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+        
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .department-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .department-content {
+            padding: 20px;
+        }
+        
+        .fee-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .fee-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .fee-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .fee-table tr:nth-child(even) {
+            background: #f5f7fa;
+        }
+        
+        .fee-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .fee-table tr:last-child td {
+            border-bottom: none;
+            font-weight: bold;
+            background: #e8eaf6;
+        }
+        
+        .notes {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            margin: 30px 0;
+        }
+        
+        .notes h3 {
+            color: #ff6f00;
+            margin-bottom: 10px;
+        }
+        
+        .notes ul {
+            list-style-position: inside;
+            padding-left: 10px;
+        }
+        
+        .notes li {
+            margin-bottom: 8px;
+        }
+        
+        /* Library Section */
+        .library {
+            background: #f8f9fa;
+        }
+        
+        .library-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .library-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .library-stat {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .library-stat i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .library-stat h4 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .library-stat p {
+            color: #666;
+        }
+        
+        /* Events Section */
+        .events {
+            background: white;
+        }
+        
+        .events-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab-btn {
+            padding: 12px 30px;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+        }
+        
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .tab-btn.active::after {
+            width: 100%;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .events-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .swiper {
+            width: 100%;
+            height: 500px;
+        }
+        
+        .swiper-slide {
+            position: relative;
+        }
+        
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .slide-content h3 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .slide-content p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: var(--primary);
+        }
+        
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary);
+        }
+        
+        /* Culturals Section */
+        .culturals {
+            background: #f8f9fa;
+        }
+        
+        .video-slider {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-slides-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .video-slide {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .video-slide video {
+            width: 100%;
+            display: block;
+            border-radius: 15px;
+            height: auto;
+            max-height: 506px;
+        }
+        
+        .video-slide-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: left;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            color: white;
+        }
+        
+        .video-slide-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .video-navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .video-nav-btn {
+            background: rgba(26, 35, 126, 0.2);
+            border: none;
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-nav-btn:hover {
+            background: rgba(26, 35, 126, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .video-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .video-dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(26, 35, 126, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .video-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .video-progress-bar {
+            height: 5px;
+            background: rgba(26, 35, 126, 0.2);
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+            max-width: 900px;
+            margin: 20px auto 0;
+        }
+        
+        .video-progress {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        /* calender Section */
+        logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .logo i {
+            font-size: 40px;
+            color: #283593;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .calendar-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .calendar-info p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .note {
+            background: #fff8e1;
+            padding: 15px;
+            border-left: 4px solid #ffb300;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .main-table th, .main-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .main-table th {
+            background: #1a237e;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .main-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .main-table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .month-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .month-title {
+            color: #1a237e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .month-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .month-table th, .month-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .month-table th {
+            background: #f5f7fa;
+            font-weight: 600;
+        }
+        
+        .holiday {
+            background: #ffebee;
+            color: #d32f2f;
+            font-weight: 500;
+        }
+        
+        .event {
+            background: #e8f5e9;
+            color: #388e3c;
+            font-weight: 500;
+        }
+        
+        .working-days {
+            margin-top: 15px;
+            font-weight: 500;
+            color: #1a237e;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        
+        .download-btn:hover {
+            background: #283593;
+        }
+        
+        @media (max-width: 768px) {
+            .main-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .month-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    
+        
+        /* Placements Section */
+        .placements {
+            background: #f8f9fa;
+        }
+        
+        .placement-banner {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 120px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .placement-slider {
+            display: flex;
+            animation: slide 30s linear infinite;
+            height: 100%;
+            align-items: center;
+        }
+        
+        .placement-item {
+            flex: 0 0 auto;
+            width: 180px;
+            height: 80px;
+            margin: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .placement-item img {
+            max-width: 100%;
+            max-height: 70%;
+            filter: grayscale(100%);
+            transition: var(--transition);
+        }
+        
+        .placement-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+        
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        .placement-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .placement-stat {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .placement-stat:hover {
+            transform: translateY(-5px);
+        }
+        
+        .placement-stat i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .placement-stat h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .placement-stat p {
+            color: #666;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: white;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .contact-details p {
+            color: #666;
+        }
+        
+        .map {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            height: 300px;
+        }
+        
+        .map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        chatbot-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #1a5276;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        /* chatbot icon styles*/
+        .chatbot-icon:hover {
+            background-color: #2e86c1;
+            transform: scale(1.1);
+        }
+        
+        .chatbot-icon i {
+            font-size: 28px;
+        }
+        
+        /* Pulse animation for the chatbot icon */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(26, 82, 118, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(26, 82, 118, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(26, 82, 118, 0);
+            }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .chatbot-icon {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .chatbot-icon i {
+                font-size: 22px;
+            }
+            
+            .content-container {
+                margin: 15px;
+                padding: 15px;
+            }
+            
+            p {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-icon {
+                width: 45px;
+                height: 45px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .chatbot-icon i {
+                font-size: 20px;
+            }
+        }
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-column p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-social a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+                z-index: 999;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .about-content,
+            .library-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid,
+            .accreditation-cards,
+            .committees-grid,
+            .departments-grid,
+            .faculty-gallery,
+            .placement-stats,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .swiper {
+                height: 400px;
+            }
+            
+            .slide-content h3 {
+                font-size: 20px;
+            }
+            
+            .slide-content p {
+                font-size: 14px;
+            }
+            
+            .head-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .head-photo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .info-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .calendar-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .calendar-date {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .events-tabs {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo img {
+                height: 60px;
+            }
+            
+            .logo-text {
+                font-size: 16px;
+            }
+            
+            .hero {
+                padding: 80px 5%;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .swiper {
+                height: 300px;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .slide-content {
+                padding: 10px;
+            }
+            
+            .slide-content h3 {
+                font-size: 18px;
+            }
+            
+            .slide-content p {
+                font-size: 12px;
+            }
+            
+            .video-slide-info {
+                padding: 15px;
+            }
+            
+            .video-slide-info h3 {
+                font-size: 1rem;
+            }
+            
+            .video-nav-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .dept-button {
+                padding: 18px;
+                min-height: 66px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <p>Applications for 2025 academic year are now open! <a href="apply.html" style="color: white; text-decoration: underline;">Apply now</a></p>
+    </div>
+    
+    <!-- Header and Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755563620/dsu.png_jc4mbj.png" alt="Institute Logo">
+                <div class="logo-text">Dhanalakshmi Srinivasan University</div>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="login.html">Are u dsu student</a></li>
+                    <li><a href="#faculty">Faculty</a></li>
+                    <li><a href="#committees">Committees</a></li>
+                    <li><a href="#fee-structure">Fee Structure</a></li>
+                    <li><a href="#library">Library</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#culturals">Culturals</a></li>
+                    <li><a href="#academic-calendar">Academic Calendar</a></li>
+                    <li><a href="#placements">Placements</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>School of Engineering and Technology</h1>
+            <p>Join one of India's premier university for technology education and research. Shape your future with world-class facilities, renowned faculty, and endless opportunities.</p>
+            <div class="hero-buttons">
+                <a href="3d.html" class="btn btn-accent">set block 3d visualisation
+                    
+                </a>
+                <a href="/apply.html" class="btn btn-primary">Apply Now</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="section-title">
+                <h2>DSU-SET by Numbers</h2>
+                <p>Our achievements and milestones in engineering education</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card fade-in">
+                    <div class="stat-number">4,500+</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">183+</div>
+                    <div class="stat-label">Faculty Members</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Programs Offered</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Placement Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About DSU</h2>
+                <p>Learn about our history, vision, and commitment to excellence in education</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image zoom-in">
+                    <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755711672/bu_lrakh8.jpg" alt="DSU Campus">
+                </div>
+                <div class="about-text fade-in">
+                    <h3>Premier Engineering Education Since 1999</h3>
+                    <p>Dhanalakshmi Srinivasan University (DSU) is a prominent educational institution located in Trichy, Tamil Nadu. Established with a vision to provide quality education and foster innovation, DSU has grown to become a leading university in the region.</p>
+                    <p>The School of Engineering and Technology at DSU offers a wide range of undergraduate and postgraduate programs in various engineering disciplines. Our state-of-the-art infrastructure, experienced faculty, and industry-oriented curriculum ensure that students receive a comprehensive education that prepares them for successful careers.</p>
+                    <p>At DSU, we believe in holistic development, combining academic excellence with extracurricular activities to nurture well-rounded individuals. Our campus provides a vibrant and inclusive environment where students can explore their passions and achieve their academic goals.</p>
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- NAAC & NIRF Section -->
+    <section class="accreditation">
+        <div class="container">
+            <div class="section-title">
+                <h2>Accreditations & Rankings</h2>
+                <p>Recognitions that validate our commitment to quality education</p>
+            </div>
+            
+            <div class="accreditation-cards">
+                <div class="card accreditation-card fade-in">
+                    <div class="accreditation-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>NAAC Accreditation</h3>
+                    <p>Dhanalakshmi Srinivasan University has been accredited by the National Assessment and Accreditation Council (NAAC) with a 'A' grade, recognizing our high standards in teaching, research, and infrastructure.</p>
+                    <a href="#" class="btn btn-primary">View Certificate</a>
+                </div>
+                
+                <div class="card accreditation-card fade-in">
+                    <div class="accreditation-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>NIRF Ranking</h3>
+                    <p>Our university has been ranked among the top engineering institutions in India by the National Institutional Ranking Framework (NIRF). We are continuously improving our ranking through academic excellence and research contributions.</p>
+                    <a href="#" class="btn btn-primary">See Details</a>
+                </div>
+                
+                <div class="card accreditation-card fade-in">
+                    <div class="accreditation-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>UGC Recognition</h3>
+                    <p>Dhanalakshmi Srinivasan University is recognized by the University Grants Commission (UGC) under section 22 of the UGC Act 1956. All our programs are approved by the relevant statutory bodies.</p>
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Departments Section -->
+    <section class="departments" id="departments">
+        <div class="container">
+            <div class="section-title">
+                <h2>Engineering Departments</h2>
+                <p>Explore our wide range of engineering programs</p>
+            </div>
+            
+            <ul class="dept-list">
+                <li><a class="dept-button" href="ai syllabus.html"><span>B.Tech – CSE (Artificial Intelligence &amp; Data Science)</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="computer science.html"><span>B.Tech – Computer Science and Engineering</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="agricultural.html"><span>B.Tech – Agricultural Engineering</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="biomedical.html"><span>B.Tech – Biomedical Engineering</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="cyber.html"><span>B.Tech – CSE (Cyber Security)</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="electrical.html"><span>B.Tech – Electrical &amp; Electronics Engineering</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="electronics.html"><span>B.Tech – Electronics &amp; Communication Engineering</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="embedded.html"><span>B.Tech – ECE (Embedded Systems)</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="information.html"><span>B.Tech – Information Technology</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="mechanical.html"><span>B.Tech – Mechanical Engineering</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="aiml.html"><span>B.Tech – Mechanical (AI &amp; ML)</span><span class="chev">›</span></a></li>
+                <li><a class="dept-button" href="robotics.html"><span>B.Tech – Mechanical (Robotics)</span><span class="chev">›</span></a></li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- Faculty Section -->
+    <section class="faculty" id="faculty">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Faculty</h2>
+                <p>Meet our distinguished faculty members</p>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search faculty by name or department...">
+            </div>
+            
+            <div class="faculty-gallery">
+                <!-- Faculty cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Committees Section -->
+    <section class="committees" id="committees">
+        <div class="container">
+            <div class="section-title">
+                <h2>Academic Committees</h2>
+                <p>Committees that ensure smooth functioning and continuous improvement</p>
+            </div>
+            
+            <div class="committees-grid">
+                <!-- Academic Committee -->
+                <div class="committee-card fade-in">
+                    <div class="committee-header">
+                        <h3>Academic Committee</h3>
+                    </div>
+                    <div class="committee-content">
+                        <div class="head-info">
+                            <div class="head-photo">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="head-details">
+                                <h3>Dr. R. Kumar</h3>
+                                <p>Professor & Head of CSE</p>
+                                <p>M.Tech, Ph.D (IIT Madras)</p>
+                            </div>
+                        </div>
+                        <div class="committee-responsibilities">
+                            <h4>Key Responsibilities</h4>
+                            <ul class="responsibilities-list">
+                                <li>Curriculum development and review</li>
+                                <li>Academic calendar planning</li>
+                                <li>Teaching-learning process monitoring</li>
+                                <li>Faculty development programs</li>
+                                <li>Student academic grievance redressal</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Placement Committee -->
+                <div class="committee-card fade-in">
+                    <div class="committee-header">
+                        <h3>Placement Committee</h3>
+                    </div>
+                    <div class="committee-content">
+                        <div class="head-info">
+                            <div class="head-photo">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="head-details">
+                                <h3>Dr. S. Meenakshi</h3>
+                                <p>Professor & Head of ECE</p>
+                                <p>M.E, Ph.D (NIT Trichy)</p>
+                            </div>
+                        </div>
+                        <div class="committee-responsibilities">
+                            <h4>Key Responsibilities</h4>
+                            <ul class="responsibilities-list">
+                                <li>Industry-institute interaction</li>
+                                <li>Placement training programs</li>
+                                <li>Organizing campus recruitment</li>
+                                <li>Internship opportunities</li>
+                                <li>Alumni relations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Research & Development Committee -->
+                <div class="committee-card fade-in">
+                    <div class="committee-header">
+                        <h3>Research & Development Committee</h3>
+                    </div>
+                    <div class="committee-content">
+                        <div class="head-info">
+                            <div class="head-photo">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="head-details">
+                                <h3>Dr. A. Rajesh</h3>
+                                <p>Professor of Mechanical Engineering</p>
+                                <p>M.E, Ph.D (IIT Delhi)</p>
+                            </div>
+                        </div>
+                        <div class="committee-responsibilities">
+                            <h4>Key Responsibilities</h4>
+                            <ul class="responsibilities-list">
+                                <li>Promoting research culture</li>
+                                <li>Research grant proposals</li>
+                                <li>Journal publications</li>
+                                <li>Patent filing assistance</li>
+                                <li>Organizing conferences</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Fee Structure Section -->
+    <section class="fee-structure" id="fee-structure">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fee Structure</h2>
+                <p>Transparent and competitive fee structure for all programs</p>
+            </div>
+            
+            <div class="info-bar">
+                <div class="academic-year">Academic Year: 2023-2024</div>
+                <div class="currency">All fees in Indian Rupees (₹)</div>
+            </div>
+            
+            <div class="departments-grid">
+                <!-- Computer Science & Engineering -->
+                <div class="department-card fade-in">
+                    <div class="department-header">
+                        <h3>Computer Science & Engineering</h3>
+                    </div>
+                    <div class="department-content">
+                        <div class="fee-item">
+                            <span>Tuition Fee</span>
+                            <span>₹95,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Development Fee</span>
+                            <span>₹15,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Exam Fee</span>
+                            <span>₹8,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Other Fees</span>
+                            <span>₹12,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Total per year</span>
+                            <span>₹1,30,000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electronics & Communication -->
+                <div class="department-card fade-in">
+                    <div class="department-header">
+                        <h3>Electronics & Communication</h3>
+                    </div>
+                    <div class="department-content">
+                        <div class="fee-item">
+                            <span>Tuition Fee</span>
+                            <span>₹90,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Development Fee</span>
+                            <span>₹15,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Exam Fee</span>
+                            <span>₹8,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Other Fees</span>
+                            <span>₹12,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Total per year</span>
+                            <span>₹1,25,000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mechanical Engineering -->
+                <div class="department-card fade-in">
+                    <div class="department-header">
+                        <h3>Mechanical Engineering</h3>
+                    </div>
+                    <div class="department-content">
+                        <div class="fee-item">
+                            <span>Tuition Fee</span>
+                            <span>₹85,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Development Fee</span>
+                            <span>₹15,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Exam Fee</span>
+                            <span>₹8,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Other Fees</span>
+                            <span>₹12,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Total per year</span>
+                            <span>₹1,20,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="notes">
+                <h3>Important Notes</h3>
+                <ul>
+                    <li>Fees are subject to change as per university guidelines</li>
+                    <li>Hostel fees and mess charges are additional</li>
+                    <li>Scholarships available for meritorious and economically disadvantaged students</li>
+                    <li>Education loan assistance available through partner banks</li>
+                    <li>For detailed fee structure, please contact the admissions office</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Library Section -->
+    <section class="library" id="library">
+        <div class="container">
+            <div class="section-title">
+                <h2>Library Resources</h2>
+                <p>State-of-the-art library with extensive resources for learning and research</p>
+            </div>
+            
+            <div class="library-content">
+                <div class="library-image zoom-in">
+                    <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1756011193/library2_r1kqwr.jpg" alt="DSU Library" style="width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);">
+                </div>
+                <div class="library-info fade-in">
+                    <h3>Central Library</h3>
+                    <p>Our central library is a knowledge hub with a vast collection of books, journals, and digital resources. Spread over 5,000 square meters, the library provides a conducive environment for study and research.</p>
+                    <p>The library is equipped with modern facilities including digital reading rooms, group study areas, and 24/7 online access to e-resources. Our dedicated staff is always available to assist students and faculty in their academic pursuits.</p>
+                    
+                    <div class="library-stats">
+                        <div class="library-stat">
+                            <i class="fas fa-book"></i>
+                            <h4>50,000+</h4>
+                            <p>Books</p>
+                        </div>
+                        <div class="library-stat">
+                            <i class="fas fa-newspaper"></i>
+                            <h4>200+</h4>
+                            <p>Journals</p>
+                        </div>
+                        <div class="library-stat">
+                            <i class="fas fa-desktop"></i>
+                            <h4>100+</h4>
+                            <p>E-Resources</p>
+                        </div>
+                        <div class="library-stat">
+                            <i class="fas fa-users"></i>
+                            <h4>500+</h4>
+                            <p>Seating Capacity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Events Section -->
+    <section class="events" id="events">
+        <div class="container">
+            <div class="section-title">
+                <h2>News & Events</h2>
+                <p>Stay updated with the latest happenings at DSU</p>
+            </div>
+            
+            <div class="events-tabs">
+                <button class="tab-btn active" data-tab="upcoming">Upcoming Events</button>
+                <button class="tab-btn" data-tab="previous">Previous Events</button>
+            </div>
+            
+            <div class="tab-content active" id="upcoming">
+                <div class="swiper events-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://res.cloudinary.com/dmfp352eu/image/upload/v1757479998/IMG-20250830-WA0004_pwrrrk.jpg" alt="https://res.cloudinary.com/dyda80tvb/image/upload/v1756020187/g2_tecfid.jpg">
+                            <div class="slide-content">
+                                <h3>NEURO Fest</h3>
+                                <p>Join us for the biggest technology festival of the year with competitions, workshops, and guest speakers from the industry.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Career Fair">
+                            <div class="slide-content">
+                                <h3>Career Fair 2023</h3>
+                                <p>Meet top recruiters and explore career opportunities in this exclusive career fair for DSU students.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Research Symposium">
+                            <div class="slide-content">
+                                <h3>Research Symposium</h3>
+                                <p>Present your research papers and projects at our annual research symposium with participants from across the country.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="previous">
+                <div class="swiper events-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1756010222/sch-of-engg-dept-06_grayt8.jpg" alt="Industry Workshop">
+                            <div class="slide-content">
+                                <h3>Industry Workshop</h3>
+                                <p>Successful completion of the industry workshop on emerging technologies with participation from leading companies.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Cultural Fest">
+                            <div class="slide-content">
+                                <h3>Cultural Festival</h3>
+                                <p>Our annual cultural festival brought together talented students from various disciplines for a celebration of art and culture.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1351&q=80" alt="Alumni Meet">
+                            <div class="slide-content">
+                                <h3>Alumni Meet 2023</h3>
+                                <p>Successful alumni meet with graduates from various batches sharing their experiences and insights with current students.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Culturals Section -->
+    <section class="culturals" id="culturals">
+        <div class="container">
+            <div class="section-title">
+                <h2>Culturals</h2>
+                <p>Experience the vibrant cultural life at DSU</p>
+            </div>
+            
+            <div class="video-slider">
+                <div class="video-slides-container">
+                    <div class="video-slide">
+                        <video controls>
+                            <source src="https://res.cloudinary.com/dyda80tvb/video/upload/v1756035526/VID-20250824-WA0050_u9kexm.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-slide-info">
+                            <h3>Pongal Celebrations</h3>
+                        </div>
+                    </div>
+                    <div class="video-slide">
+                        <video controls>
+                            <source src="https://res.cloudinary.com/dyda80tvb/video/upload/v1756035775/VID-20250824-WA0051_gekv3z.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-slide-info">
+                            <h3>Christmas Celebration</h3>
+                        </div>
+                    </div>
+                    <div class="video-slide">
+                        <video controls>
+                            <source src="https://res.cloudinary.com/dyda80tvb/video/upload/v1756035823/VID-20250824-WA0054_l6i8aw.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-slide-info">
+                            <h3>Anantara</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-navigation">
+                <button class="video-nav-btn video-prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="video-nav-btn video-next-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="video-dots">
+                <div class="video-dot active"></div>
+                <div class="video-dot"></div>
+                <div class="video-dot"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Academic Calendar Section -->
+    <!DOCTYPE html>
+    <div class="container">
+        <div class="calendar-info">
+            <h2>Academic Schedule 2025-26 Odd Semester</h2>
+            <p>This calendar applies to III, V, and VII Semesters of all branches in the School of Engineering and Technology.</p>
+            
+            <table class="main-table">
+                <thead>
+                    <tr>
+                        <th>Sl.no</th>
+                        <th>Particulars</th>
+                        <th>VII Sem.</th>
+                        <th>V Sem.</th>
+                        <th>III Sem.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Commencement of Classes</td>
+                        <td>21.07.2025</td>
+                        <td>21.07.2025</td>
+                        <td>21.07.2025</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Placement Training</td>
+                        <td>21.07.2025 to 06.08.2025</td>
+                        <td>07.08.2025 to 20.08.2025 & 08.09.2025 to 12.09.2025</td>
+                        <td>21.08.2025 to 02.09.2025 & 07.10.2025 to 11.10.2025</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Unit I Completion</td>
+                        <td>23.08.2025</td>
+                        <td>02.08.2025</td>
+                        <td>02.08.2025</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Unit II Completion</td>
+                        <td>13.09.2025</td>
+                        <td>02.09.2025</td>
+                        <td>20.08.2025</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>CAT I</td>
+                        <td>15.09.2025</td>
+                        <td>15.09.2025</td>
+                        <td>15.09.2025</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Unit III Completion</td>
+                        <td>27.09.2025</td>
+                        <td>27.09.2025</td>
+                        <td>23.09.2025</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Unit IV Completion</td>
+                        <td>17.10.2025</td>
+                        <td>17.10.2025</td>
+                        <td>23.10.2025</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>CAT II</td>
+                        <td>27.10.2025</td>
+                        <td>27.10.2025</td>
+                        <td>27.10.2025</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Completion of Lab Experiments</td>
+                        <td>07.11.2025</td>
+                        <td>07.11.2025</td>
+                        <td>07.11.2025</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Unit V Completion</td>
+                        <td>07.11.2025</td>
+                        <td>07.11.2025</td>
+                        <td>07.11.2025</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Revision Classes</td>
+                        <td>08.11.2025</td>
+                        <td>08.11.2025</td>
+                        <td>08.11.2025</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Model Practical Examination</td>
+                        <td>08.11.2025</td>
+                        <td>08.11.2025</td>
+                        <td>08.11.2025</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Model Theory Examination</td>
+                        <td>14.11.2025</td>
+                        <td>14.11.2025</td>
+                        <td>14.11.2025</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Last Working Day</td>
+                        <td>21.11.2025</td>
+                        <td>21.11.2025</td>
+                        <td>21.11.2025</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Commencement of Practical Examination</td>
+                        <td>24.11.2025</td>
+                        <td>24.11.2025</td>
+                        <td>24.11.2025</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>University Theory Exam Commences on</td>
+                        <td>03.12.2025</td>
+                        <td>03.12.2025</td>
+                        <td>03.12.2025</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>Reopening Day for Even Semester</td>
+                        <td>02.01.2026</td>
+                        <td>02.01.2026</td>
+                        <td>02.01.2026</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="note">
+                <p><strong>Note:</strong></p>
+                <p>1. Model Practical Exam must be conducted as per the given schedule.</p>
+                <p>2. Syllabus must be completed as per the lesson plan in time.</p>
+            </div>
+        </div>
+
+        <div class="month-section">
+            <h2 class="month-title">July 2025</h2>
+            <table class="month-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Event</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="holiday">
+                        <td>6</td>
+                        <td>Sunday</td>
+                        <td>Muharram</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>13</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr class="event">
+                        <td>19</td>
+                        <td>Saturday</td>
+                        <td>Shanalakshmi Amma Memorial Day</td>
+                    </tr>
+                    <tr class="event">
+                        <td>21</td>
+                        <td>Monday</td>
+                        <td>Opening Day (II, III & IV Years)</td>
+                    </tr>
+                    <tr class="event">
+                        <td>21</td>
+                        <td>Monday</td>
+                        <td>IV Year Placement Training Starts</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="working-days">Cumulative Working Days: 10</p>
+        </div>
+
+        <div class="month-section">
+            <h2 class="month-title">August 2025</h2>
+            <table class="month-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Event</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Friday</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Saturday</td>
+                        <td>UNIT 1 COMPLETION (III & II YEARS)</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>3</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>4-5</td>
+                        <td>Monday-Tuesday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>6</td>
+                        <td>Wednesday</td>
+                        <td>IV-YEAR PLACEMENT TRAINING ENDS</td>
+                    </tr>
+                    <tr class="event">
+                        <td>7</td>
+                        <td>Thursday</td>
+                        <td>III-YEAR PLACEMENT TRAINING STARTS</td>
+                    </tr>
+                    <tr>
+                        <td>8-9</td>
+                        <td>Friday-Saturday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>10</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>11-14</td>
+                        <td>Monday-Thursday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>15</td>
+                        <td>Friday</td>
+                        <td>Independence Day</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>Saturday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>17</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>18-19</td>
+                        <td>Monday-Tuesday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>20</td>
+                        <td>Wednesday</td>
+                        <td>UNIT 2 COMPLETION (II YEAR)<br>III-YEAR PLACEMENT TRAINING ENDS</td>
+                    </tr>
+                    <tr class="event">
+                        <td>21</td>
+                        <td>Thursday</td>
+                        <td>II-YEAR PLACEMENT TRAINING STARTS</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>Friday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>23</td>
+                        <td>Saturday</td>
+                        <td>UNIT 1 COMPLETION (IV YEAR)</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>24</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>25-26</td>
+                        <td>Monday-Tuesday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>27</td>
+                        <td>Wednesday</td>
+                        <td>Ganesh Chaturthi</td>
+                    </tr>
+                    <tr>
+                        <td>28-30</td>
+                        <td>Thursday-Saturday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>31</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="working-days">Working Days: 22<br>Cumulative Working Days: 32</p>
+        </div>
+
+        <div class="month-section">
+            <h2 class="month-title">September 2025</h2>
+            <table class="month-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Event</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Monday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>2</td>
+                        <td>Tuesday</td>
+                        <td>UNIT 2 COMPLETION (III YEAR)<br>II-YEAR PLACEMENT TRAINING ENDS</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>3-6</td>
+                        <td>Wednesday-Saturday</td>
+                        <td>ONAM- HOLIDAY</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>7</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr class="event">
+                        <td>8</td>
+                        <td>Monday</td>
+                        <td>III-YEAR PLACEMENT TRAINING STARTS</td>
+                    </tr>
+                    <tr>
+                        <td>9-11</td>
+                        <td>Tuesday-Thursday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>12</td>
+                        <td>Friday</td>
+                        <td>III-YEAR PLACEMENT TRAINING ENDS</td>
+                    </tr>
+                    <tr class="event">
+                        <td>13</td>
+                        <td>Saturday</td>
+                        <td>UNIT 2 COMPLETION (IV YEAR)</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>14</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr class="event">
+                        <td>15</td>
+                        <td>Monday</td>
+                        <td>CAT 1 EXAM STARTS (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr>
+                        <td>16-19</td>
+                        <td>Tuesday-Friday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>20</td>
+                        <td>Saturday</td>
+                        <td>CAT 1 EXAM ENDS (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>21</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>Monday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>23</td>
+                        <td>Tuesday</td>
+                        <td>UNIT 3 COMPLETION (II YEAR)</td>
+                    </tr>
+                    <tr>
+                        <td>24-26</td>
+                        <td>Wednesday-Friday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>27</td>
+                        <td>Saturday</td>
+                        <td>UNIT 3 COMPLETION (III & IV YEARS)</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>28</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>29-30</td>
+                        <td>Monday-Tuesday</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="working-days">Working Days: 22<br>Cumulative Working Days: 54</p>
+        </div>
+
+        <div class="month-section">
+            <h2 class="month-title">October 2025</h2>
+            <table class="month-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Event</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="holiday">
+                        <td>1</td>
+                        <td>Wednesday</td>
+                        <td>MAHA NAVAMI</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>2</td>
+                        <td>Thursday</td>
+                        <td>VIJAYA DASHAMI</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>3-4</td>
+                        <td>Friday-Saturday</td>
+                        <td>Holiday</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>5</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>6-7</td>
+                        <td>Monday-Tuesday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>7</td>
+                        <td>Tuesday</td>
+                        <td>II-YEAR PLACEMENT TRAINING STARTS</td>
+                    </tr>
+                    <tr>
+                        <td>8-10</td>
+                        <td>Wednesday-Friday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>11</td>
+                        <td>Saturday</td>
+                        <td>II-YEAR PLACEMENT TRAINING ENDS</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>12</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>13-16</td>
+                        <td>Monday-Thursday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>17</td>
+                        <td>Friday</td>
+                        <td>UNIT 4 COMPLETION (III & IV YEARS)</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Saturday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>19</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>20</td>
+                        <td>Monday</td>
+                        <td>Diwali</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>21</td>
+                        <td>Tuesday</td>
+                        <td>Holiday</td>
+                    </tr>
+                    <tr class="event">
+                        <td>22</td>
+                        <td>Wednesday</td>
+                        <td>UNIT 4 COMPLETION (II YEAR)</td>
+                    </tr>
+                    <tr>
+                        <td>23-24</td>
+                        <td>Thursday-Friday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>25</td>
+                        <td>Saturday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>Monday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>27</td>
+                        <td>Tuesday</td>
+                        <td>CAT 2 EXAM STARTS (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr>
+                        <td>28-30</td>
+                        <td>Wednesday-Friday</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td>Saturday</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="working-days">Working Days: 19<br>Cumulative Working Days: 73</p>
+        </div>
+
+        <div class="month-section">
+            <h2 class="month-title">November 2025</h2>
+            <table class="month-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Event</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="event">
+                        <td>1</td>
+                        <td>Saturday</td>
+                        <td>CAT 2 EXAM ENDS (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>2</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>3-6</td>
+                        <td>Monday-Thursday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>7</td>
+                        <td>Friday</td>
+                        <td>UNIT V COMPLETION & COMPLETION OF LAB EXPERIMENTS (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr class="event">
+                        <td>8</td>
+                        <td>Saturday</td>
+                        <td>REVISION CLASS STARTS/MODEL PRACTICAL STARTS (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>9</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>10-12</td>
+                        <td>Monday-Wednesday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>13</td>
+                        <td>Thursday</td>
+                        <td>REVISION CLASS ENDS/MODEL PRACTICAL ENDS (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr class="event">
+                        <td>14</td>
+                        <td>Friday</td>
+                        <td>MODEL EXAM STARTS (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Saturday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>16</td>
+                        <td>Sunday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>17-20</td>
+                        <td>Monday-Thursday</td>
+                        <td></td>
+                    </tr>
+                    <tr class="event">
+                        <td>21</td>
+                        <td>Friday</td>
+                        <td>MODEL EXAM ENDS-LAST WORKING DAY (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>22</td>
+                        <td>Saturday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr class="event">
+                        <td>23</td>
+                        <td>Sunday</td>
+                        <td>END SEM PRACTICAL EXAM STARTS (II, III & IV YEARS)</td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>24-25</td>
+                        <td>Monday-Tuesday</td>
+                        <td>Sunday</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="working-days">Working Days: 23<br>Cumulative Working Days: 96</p>
+        </div>
+
+        <a href="#" class="download-btn">
+            <i class="fas fa-download"></i> Download Academic Calendar
+        </a>
+    </div>
+
+    
+
+    
+    <!-- Placements Section -->
+    <section class="placements" id="placements">
+        <div class="container">
+            <div class="section-title">
+                <h2>Placements</h2>
+                <p>Our students have been placed in top companies across the globe</p>
+            </div>
+            
+            <div class="placement-banner">
+                <div class="placement-slider">
+                    <div class="placement-item">
+                        <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755561081/tata_logo_udy7hj.png" alt="Tata">
+                    </div>
+                    <div class="placement-item">
+                        <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755562465/hcl-removebg-preview_mmcx9t.png" alt="HCL">
+                    </div>
+                    <div class="placement-item">
+                        <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755562570/shriram_logo_xyso5x.png" alt="Shriram">
+                    </div>
+                    <div class="placement-item">
+                        <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755562630/petrofac_logo_rvabik.png" alt="Petrofac">
+                    </div>
+                    <div class="placement-item">
+                        <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755562713/hdfc_logo_ncsqc9.png" alt="HDFC">
+                    </div>
+                    <div class="placement-item">
+                        <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755562796/e4_logo_ocgihb.png" alt="E4">
+                    </div>
+                    <div class="placement-item">
+                        <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755562868/infosys_logo_mmmobv.png" alt="Infosys">
+                    </div>
+                    <div class="placement-item">
+                        <img src="https://res.cloudinary.com/dyda80tvb/image/upload/v1755562942/genpact_logo_ofgqkk.png" alt="Genpact">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="placement-stats">
+                <div class="placement-stat fade-in">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>95%</h3>
+                    <p>Placement Rate</p>
+                </div>
+                <div class="placement-stat fade-in">
+                    <i class="fas fa-rupee-sign"></i>
+                    <h3>12 LPA</h3>
+                    <p>Highest Package</p>
+                </div>
+                <div class="placement-stat fade-in">
+                    <i class="fas fa-building"></i>
+                    <h3>200+</h3>
+                    <p>Recruiting Companies</p>
+                </div>
+                <div class="placement-stat fade-in">
+                    <i class="fas fa-handshake"></i>
+                    <h3>500+</h3>
+                    <p>Offers Made</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us for more information</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Address</h3>
+                            <p>NH-45, Trichy Chennai Trunk Road, Samayapuram (near samayapuram toll plaza), Tiruchirapalli-621112. Tamilnadu, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+91 6384176766 | +91 6384176769</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>enquiry@dsuniversity.ac.in</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Office Hours</h3>
+                            <p>Mon - Fri: 9:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.093981100635!2d78.656074774687!3d10.91452308923724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2f99d2f4b1b5%3A0x6b5b3b3b3b3b3b3b!2sDhanalakshmi%20Srinivasan%20University!5e0!3m2!1sen!2sin!4v1691234567890!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Chatbot Icon -->
+    <a href="chatbot.html" class="chatbot-icon">
+        <i class="fas fa-comment-dots"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Institute of Technology</h3>
+                    <p>Premier university for engineering education and research established with a vision to create globally competent professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/share/16vAdhPrMU/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/DSUTRY_OFFICIAL"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/dsu_trichy?utm_source=ig_web_button_share_sheet&igsh=MnBmeWRnOWU2djA4"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/dhanalakshmisrinivasanuniversity"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://youtube.com/@dsu-trichy-campus?si=qhUEQcJs4WRH2YkO"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#departments">Departments</a></li>
+                        <li><a href="#faculty">Faculty</a></li>
+                        <li><a href="#committees">Committees</a></li>
+                        <li><a href="#fee-structure">Fee Structure</a></li>
+                        <li><a href="#library">Library</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#placements">Placements</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Undergraduate Programs</a></li>
+                        <li><a href="#">Graduate Programs</a></li>
+                        <li><a href="#">Doctoral Programs</a></li>
+                        <li><a href="#">Diploma Programs</a></li>
+                        <li><a href="#">Certificate Courses</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> NH-45,Trichy Chennai Trunk Road,Samayapuram(near samayapuram toll plaza),Tiruchirapalli-621112.Tamilnadu,India</p>
+                    <p><i class="fas fa-phone"></i> +91 6384176766 | +91 6384176769</p>
+                    <p><i class="fas fa-envelope"></i> enquiry@dsuniversity.ac.in</p>
+                    <p><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Dhanalakshmi Srinivasan University. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Faculty data with names and positions extracted from image URLs
+        const facultyData = [
+            { 
+                img: "https://res.cloudinary.com/dyda80tvb/image/upload/v1755838426/27_frj5eg.jpg", 
+                name: "Dr.v.sekar", 
+                position: "Dean", 
+                department: "Electrical and Electronics Engineering", 
+            },
+            { 
+                img: "https://res.cloudinary.com/dyda80tvb/image/upload/v1755838704/31_wiyk8a.jpg", 
+                name: "Dr.N.Shanmugapriya", 
+                position: "Associate Dean", 
+                department: "computer science and Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/dyda80tvb/image/upload/v1755838813/43_m9xtww.jpg", 
+                name: "Dr.s.padmapriya", 
+                position: "Associate professor", 
+                department: "Computer science Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017581/mani_izmfay.jpg", 
+                name: "Mr.T.Mani", 
+                position: "Associate Professor ", 
+                department: "Mathematics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017582/Dr_K_Balamurugan_ew6l9d.jpg", 
+                name: "Dr. K. Balamurugan", 
+                position: "Associate professor", 
+                department: "Mathematics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017581/Dr-Geetha-P1_xump7j.jpg", 
+                name: "Dr. Geetha P", 
+                position: "Assistant Professor", 
+                department: "Electronis and communication Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017581/Anitha-Parthasarathy_vt76ay.jpg", 
+                name: "Dr. P. Anitha", 
+                position: "Associate professor", 
+                department: "Computer Science and Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017581/Mrs_M_JAYASRI_acnsvq.jpg", 
+                name: "Mrs. M. Jayasri", 
+                position: "Associate professor", 
+                department: "Computer science and Engineering" 
+            },
+            { 
+                img:  "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/Ms__C__Aarthy_wrrv9m.jpg",
+                name: "Ms. C. Aarthy", 
+                position: "Assistant Professor _junior", 
+                department: "CSE (AIDS)" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017567/Dr_G_M_Balamurugan11_ptk2yh.jpg", 
+                name: "Dr. G.M. Balamurugan", 
+                position: "Professor of Mechanical Engineering", 
+                department: "Mechanical Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017567/sob_vmdqsm.jpg", 
+                name: "Dr.R.Shobia", 
+                position: "Assistant professor", 
+                department: "English" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/Mrs_S__Lavanya_jpfkme.jpg", 
+                name: "Mrs. S. Lavanya", 
+                position: "Assistant professor_junior", 
+                department: "Computer Science and Engineering" 
+            },
+            { 
+                img:"https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/Mrs__M__Kanimozhi_gxwgpt.jpg",
+                name: "Mrs. M. Kanimozhi", 
+                position: "Assistant professor_junior", 
+                department: "Computer Science and Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/ANU_drzwfk.jpg", 
+                name: "Dr. M. Anu", 
+                position: "Assistant professor", 
+                department: "Chemistry" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/Mrs__D__Suvetha_b0f3l3.jpg", 
+                name: "Mrs. D. Suvetha", 
+                position: "Associate profeesor_junior", 
+                department: "Mathematics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/Mrs__G__Mahalakshmi_ykf2xh.jpg", 
+                name: "Mrs. G. Mahalakshmi", 
+                position: "Assistant Professor _Junior", 
+                department: "artificial intelligence and data science" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017565/Mrs__P_V__Indira1_oucihy.jpg", 
+                name: "Mrs. P.V. Indira", 
+                position: "Assistant professor_junior", 
+                department: "Artificial intelligence and data science" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017566/TAMILSELVI_PHOTO1_cf8axq.jpg", 
+                name: "Dr. Tamilselvi", 
+                position: "Associate Professor_junior", 
+                department: "Computer science and Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017565/Dr-K-Karthika_rduxc3.jpg", 
+                name: "Dr. K. Karthika", 
+                position: "Assistant Professor", 
+                department: "Physics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017565/Dr_A_Kalaiyarasi_mhwrle.jpg", 
+                name: "Dr. A. Kalaiyarasi", 
+                position: " Assistant Professor ", 
+                department: "Chemistry" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017553/Dr-C-Priya_rls6z2.jpg", 
+                name: "Dr. C. Priya", 
+                position: "Associate Professor ", 
+                department: "English" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017553/Dr__Maruthanila-VL_dk01l7.jpg", 
+                name: "Dr. Maruthanila V.L.", 
+                position: "Assistant Professor", 
+                department: "Biotech" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017552/Dr_A_X_Amal-Rebin_u2n11k.jpg", 
+                name: "Dr. A.X. Amal-Rebin", 
+                position: " Associate Professor", 
+                department: "Mechanical Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017553/Indirajith-K1_h9ihfw.jpg", 
+                name: "Dr. Indirajith K", 
+                position: "Associate Professor", 
+                department: "Electrical and Electronics Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017552/Sathiya_wjwkjn.jpg", 
+                name: "Dr. Sathiyapriya", 
+                position: "Assistant Professor", 
+                department: "Mathematics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017552/Dr_N_Kumaran_ks39vc.jpg", 
+                name: "Dr. N. Kumaran", 
+                position: " Assistant Professor", 
+                department: "Computer Science and Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017552/lakshmi_kshp7q.jpg", 
+                name: "Dr. Lakshmi", 
+                position: "Associate Professor", 
+                department: "Electrical and Electronics Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017552/Dr_N_Shankar_kvtbn3.jpg", 
+                name: "Dr. N. Shankar", 
+                position: " Associate Professor ", 
+                department: "Biomedical Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017552/Nagaraj-MCA_a9kroz.jpg", 
+                name: "Dr.VR.Nagarajan", 
+                position: "Associate professor", 
+                department: "Master of computer Applications",
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017542/Dr_Sundara-Rajulu1_z3k4pb.jpg", 
+                name: "Dr. Sundara Rajulu Navaneethakrishnan", 
+                position: "Professor ", 
+                department: " Computer science English" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017536/Dr_G_Karthy_Associate_Professor_ECE_uckll5.jpg", 
+                name: "Dr. G. Karthy", 
+                position: "Associate Professor of ECE", 
+                department: "Electronics and Communication and Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017536/Rajini_wfipae.jpg", 
+                name: "Dr. Rajinikanth", 
+                position: "Associate professor", 
+                department: "Mathematics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017535/SHA_b104jv.jpg", 
+                name: "Dr. Sharad porwal", 
+                position: "Associate professor", 
+                department: "Chemistry" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017535/Balamurugan_s0rsev.jpg", 
+                name: "Dr. Balamurugan", 
+                position: "Associate professor", 
+                department: "Physics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017534/v_selvi1_nr1xia.jpg", 
+                name: "Dr. V. Thamil Selvi", 
+                position: "Associate Professor", 
+                department: "Engish" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017534/Dr_-Elancheran-Ramakrishnan_rbfxjz.jpg", 
+                name: "Dr. Elancheran Ramakrishnan", 
+                position: "Assistant Professor", 
+                department: "Chemistry" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017534/Krsihnamoorthy_tv3psh.jpg", 
+                name: "Dr. Krishnamoorthy", 
+                position: "Associate professor", 
+                department: "Chemistry" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017533/Dr_R_Vijayalakshmi_rbtsmm.jpg", 
+                name: "Dr. R. Vijayalakshmi", 
+                position: "Associate Professor", 
+                department: "English" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017532/Dr-A-Sirajunnisa_zl83rb.jpg", 
+                name: "Dr. A. Sirajunnisa", 
+                position: "Professor ", 
+                department: "chemistry" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017532/Meganathan_fryoxd.jpg", 
+                name: "Dr.R. Meganathan", 
+                position: "Professor ", 
+                department: "Mathematics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017531/Dr_Sasikumar_G_ywgoll.jpg", 
+                name: "Dr. Sasikumar G", 
+                position: "Associate Dean", 
+                department: "compuer science and engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017531/Revathi_-SET1_pzg0un.jpg", 
+                name: "Dr.B. Revathi", 
+                position:  "Professor", 
+                department: "Electronics and communication Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017531/Dr_Suresh1_rtgkgo.jpg", 
+                name: "Dr. Suresh C", 
+                position: "Professor ", 
+                department: "EEE" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017531/Dr__V__Raju2_jllkni.jpg", 
+                name: "Dr. V. Raju", 
+                position: "Associate Dean", 
+                department: "Master of computer Application information technology" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017530/1_am1agd.jpg", 
+                name: "Dr.B. Shanmugham", 
+                position: "Professor", 
+                department: "Electonics and communication Engineering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017531/Dr__S__Selvakumar1_qgse3q.jpg", 
+                name: "Dr. S. Selvakumar", 
+                position: " Professor ", 
+                department: "Computer Science Engoneering" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017531/Dr_E_Rameshkumar1_iahqd0.jpg", 
+                name: "Dr. E. Rameshkumar", 
+                position: "Professor of Mathematics", 
+                department: "Mathematics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017529/mercy_djkunr.jpg", 
+                name: "Dr. Mercy Geraldine", 
+                position: "Professor ", 
+                department: "Computer Science and technology" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017529/John1_dprbtb.jpg", 
+                name: "Dr. John Ethilton", 
+                position: "Professor", 
+                department: "Physics" 
+            },
+            { 
+                img: "https://res.cloudinary.com/drz22hsjz/image/upload/v1756017529/Dr-B-Ramesh_qvmqcj.jpg", 
+                name: "Dr. B. Ramesh", 
+                position: "Associate Dean", 
+                department: "Mechanical Engineering" 
+            }
+        ];
+
+        // Function to generate faculty cards
+        function generateFacultyCards(faculty) {
+            const gallery = document.querySelector('.faculty-gallery');
+            gallery.innerHTML = '';
+            
+            faculty.forEach(member => {
+                const card = document.createElement('div');
+                card.className = 'faculty-card fade-in';
+                
+                card.innerHTML = `
+                    <img src="${member.img}" alt="${member.name}" class="faculty-img">
+                    <div class="faculty-info">
+                        <h3 class="faculty-name">${member.name}</h3>
+                        <p class="faculty-position">${member.position}</p>
+                        <span class="department">${member.department}</span>
+                    </div>
+                `;
+                
+                gallery.appendChild(card);
+            });
+        }
+        
+        // Initialize the faculty gallery
+        generateFacultyCards(facultyData);
+        
+        // Search functionality
+        document.getElementById('search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            const filteredFaculty = facultyData.filter(member => 
+                member.name.toLowerCase().includes(searchTerm) || 
+                member.position.toLowerCase().includes(searchTerm) ||
+                member.department.toLowerCase().includes(searchTerm)
+            );
+            
+            generateFacultyCards(filteredFaculty);
+        });
+        
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+        
+        // Events Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Initialize Swiper for events sliders
+        const upcomingSwiper = new Swiper('#upcoming .swiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: '#upcoming .swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '#upcoming .swiper-button-next',
+                prevEl: '#upcoming .swiper-button-prev',
+            },
+        });
+        
+        const previousSwiper = new Swiper('#previous .swiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: '#previous .swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '#previous .swiper-button-next',
+                prevEl: '#previous .swiper-button-prev',
+            },
+        });
+        
+        // Video Slider
+        const videoSlidesContainer = document.querySelector('.video-slides-container');
+        const videoSlides = document.querySelectorAll('.video-slide');
+        const videoPrevBtn = document.querySelector('.video-prev-btn');
+        const videoNextBtn = document.querySelector('.video-next-btn');
+        const videoDots = document.querySelectorAll('.video-dot');
+        
+        let currentVideoSlide = 0;
+        const videoSlideCount = videoSlides.length;
+        
+        // Update video slides function
+        function updateVideoSlide() {
+            videoSlidesContainer.style.transform = `translateX(-${currentVideoSlide * 100}%)`;
+            
+            // Update dots
+            videoDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentVideoSlide);
+            });
+            
+            // Pause all videos
+            document.querySelectorAll('.video-slide video').forEach(video => {
+                video.pause();
+            });
+        }
+        
+        // Next video slide
+        videoNextBtn.addEventListener('click', () => {
+            currentVideoSlide = (currentVideoSlide + 1) % videoSlideCount;
+            updateVideoSlide();
+        });
+        
+        // Previous video slide
+        videoPrevBtn.addEventListener('click', () => {
+            currentVideoSlide = (currentVideoSlide - 1 + videoSlideCount) % videoSlideCount;
+            updateVideoSlide();
+        });
+        
+        // Dot navigation for video slider
+        videoDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentVideoSlide = index;
+                updateVideoSlide();
+            });
+        });
+        
+        // Auto-play for video slider
+        setInterval(() => {
+            currentVideoSlide = (currentVideoSlide + 1) % videoSlideCount;
+            updateVideoSlide();
+        }, 7000);
+        
+        // Scroll animations
+        function checkScroll() {
+            const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .zoom-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
+                
+                if (isVisible) {
+                    element.classList.add('appear');
+                }
+            });
+            
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 500) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+        
+        // Back to top functionality
+        document.querySelector('.back-to-top').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
