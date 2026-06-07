@@ -3,7 +3,7 @@
 ## Project Overview
 The DSU Website is a responsive and user-friendly educational web application designed to provide students, parents, and visitors with essential information about the institution. The website offers a structured and visually appealing platform to access details about courses, departments, admissions, campus facilities, and contact information.
 
-This project was developed as a collaborative academic mini project to enhance frontend web development skills and gain practical experience in teamwork, project management, and version control using GitHub.
+This project was developed as a collabrative academic mini project to enhance frontend web development skills and gain practical experience in teamwork , project management, and version control using Github
 ---
 
 ## Features
@@ -50,7 +50,7 @@ This project was developed to create an informative and responsive educational w
 3. Run `index.html` in any browser
 
 ## Aknowledgements
-This project was developed as part of an academic learning initiative to gain practical experience in web development, collaboration, and version control practices
+This project was developed as part of an acadamic learning initiative to gain practical experience in web development, collabration, and version control practices
 ---
 
 ## GitHub Repository
